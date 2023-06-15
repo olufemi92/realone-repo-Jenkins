@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                git 'https://github.com/tkibnyusuf/realone-repo.git'
+                git 'https://github.com/olufemi92/realone-repo-Jenkins.git'
             }
         }
         
@@ -32,7 +32,7 @@ pipeline {
          stage('Logging into AWS ECR') {
                      environment {
                         AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')
-                        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+                        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key_id')
                          
                    }
                      steps {
@@ -69,7 +69,7 @@ pipeline {
                     steps {
                       script{
                         dir('kubernetes/') {
-                          sh 'aws eks update-kubeconfig --name myAppp-eks-cluster --region us-east-1'
+                          sh 'aws eks update-kubeconfig --name myAppp-eks-cluster --region us-east-2'
                           sh """aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"""
                           sh 'helm upgrade --install --set image.repository="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}" --set image.tag="2" myjavaapp myapp/ ' 
 
