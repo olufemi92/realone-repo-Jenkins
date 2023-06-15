@@ -3,10 +3,10 @@ pipeline {
     environment {
         VERSION = "${env.BUILD_ID}"
         AWS_ACCOUNT_ID="702313464950"
-        AWS_DEFAULT_REGION="us-east-1"
+        AWS_DEFAULT_REGION="us-east-2"
         IMAGE_REPO_NAME="jenkins-pipeline"
         IMAGE_TAG= "${env.BUILD_ID}"
-        REPOSITORY_URI = "775012328020.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline"
+        REPOSITORY_URI = "702313464950.dkr.ecr.us-east-2.amazonaws.com/jenkins-pipeline"
     }
     stages {
         stage('Git checkout') {
