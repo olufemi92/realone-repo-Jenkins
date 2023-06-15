@@ -1,5 +1,6 @@
 provider "aws" {
     region = "us-east-2"
+    profile   = "captainnlt" 
 }
 
 variable vpc_cidr_block {}
